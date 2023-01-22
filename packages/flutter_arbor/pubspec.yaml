@@ -1,0 +1,25 @@
+name: flutter_arbor
+description: Modular and compile-time safe DI for Flutter without fragility and magic.
+version: 0.1.0
+repository: https://github.com/purplenoodlesoop/arbor/tree/master/packages/flutter_arbor
+issue_tracker: https://github.com/purplenoodlesoop/arbor/issues
+homepage: https://github.com/purplenoodlesoop/arbor/tree/master/packages/flutter_arbor
+documentation: https://github.com/purplenoodlesoop/arbor/blob/master/packages/flutter_arbor/README.md
+
+environment:
+  sdk: ">=2.17.5 <3.0.0"
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  arbor:
+    path:
+      ../arbor
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  purple_lints: ^0.4.0
+
+flutter:

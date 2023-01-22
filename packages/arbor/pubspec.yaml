@@ -1,0 +1,18 @@
+name: arbor
+description: Modular and compile-time safe DI for Dart without fragility and magic.
+version: 0.1.0
+repository: https://github.com/purplenoodlesoop/arbor/tree/master/packages/arbor
+issue_tracker: https://github.com/purplenoodlesoop/arbor/issues
+homepage: https://github.com/purplenoodlesoop/arbor/tree/master/packages/arbor
+documentation: https://github.com/purplenoodlesoop/arbor/blob/master/packages/arbor/README.md
+
+environment:
+  sdk: '>=2.17.0 <3.0.0'
+
+dependencies:
+  meta: ^1.7.0
+#   path: ^1.8.0
+
+dev_dependencies:
+  purple_lints: ^0.4.0
+  test: ^1.16.0
