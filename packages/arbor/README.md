@@ -4,7 +4,6 @@
 [![GitHub Stars](https://img.shields.io/github/stars/purplenoodlesoop/arbor.svg)](https://github.com/purplenoodlesoop/arbor)
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://en.wikipedia.org/wiki/MIT_License)
 [![Linter](https://img.shields.io/badge/style-custom-brightgreen)](https://github.com/purplenoodlesoop/arbor/blob/master/packages/arbor/analysis_options.yaml)
-[![Code size](https://img.shields.io/github/languages/code-size/purplenoodlesoop/arbor/tree/master/packages/arbor)](https://github.com/purplenoodlesoop/arbor/tree/master/packages/arbor)
 
 ---
 
