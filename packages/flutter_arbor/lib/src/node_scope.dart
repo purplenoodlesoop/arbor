@@ -3,21 +3,31 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_arbor/src/inherited_node_scope.dart';
 
+/// A Callback that retrieves a [Lifecycle] object from the [BuildContext] using
+/// the shortcut [NodeScope.of] method.
 typedef CreateNestedScope<C extends Lifecycle> = ObjectFactory<C> Function(
   BuildContext context,
   P Function<P extends Lifecycle>() find,
 );
 
+/// A [StatefulWidget] that creates a [Lifecycle] object and propagates it down
+/// the [Element] tree using an [InheritedWidget].
 class NodeScope<N extends Lifecycle> extends StatefulWidget {
   final N Function(BuildContext context) create;
   final Widget child;
 
+  /// Creates a [NodeScope] widget that creates a [Lifecycle] object and
+  /// propagates it down the [Element] tree using an [InheritedWidget].
   const NodeScope({
     required this.create,
     required this.child,
     super.key,
   });
 
+  /// Creates a [NodeScope] widget that creates a [Lifecycle] object and
+  /// propagates it down the [Element] tree using an [InheritedWidget] and
+  /// provides a shortcut method for retrieving a [Lifecycle] object from the
+  /// [BuildContext] using the [NodeScope.of].
   factory NodeScope.child({
     required CreateNestedScope<N> create,
     required Widget child,
@@ -32,6 +42,8 @@ class NodeScope<N extends Lifecycle> extends StatefulWidget {
         child: child,
       );
 
+  /// Retrieves the [Lifecycle] object from the [BuildContext] using the
+  /// [BuildContext.dependOnInheritedWidgetOfExactType] method.
   static N of<N extends Lifecycle>(
     BuildContext context, {
     bool listen = false,
