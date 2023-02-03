@@ -10,19 +10,52 @@ typedef CreateNestedScope<C extends Lifecycle> = ObjectFactory<C> Function(
   P Function<P extends Lifecycle>() find,
 );
 
+/// A Callback that creates a [Lifecycle] object.
+typedef CreateNode<N extends Lifecycle> = N Function(
+  BuildContext context,
+);
+
 /// A [StatefulWidget] that creates a [Lifecycle] object and propagates it down
 /// the [Element] tree using an [InheritedWidget].
 class NodeScope<N extends Lifecycle> extends StatefulWidget {
-  final N Function(BuildContext context) create;
+  final N? value;
+  final CreateNode<N>? create;
   final Widget child;
 
   /// Creates a [NodeScope] widget that creates a [Lifecycle] object and
   /// propagates it down the [Element] tree using an [InheritedWidget].
   const NodeScope({
-    required this.create,
+    required CreateNode<N> create,
+    required Widget child,
+    Key? key,
+  }) : this._(
+          key: key,
+          create: create,
+          child: child,
+        );
+
+  const NodeScope._({
     required this.child,
-    super.key,
+    required super.key,
+    this.value,
+    this.create,
   });
+
+  /// Creates a [NodeScope] widget with a [Lifecycle] object passed to it
+  /// and propagates it down the [Element] tree using an [InheritedWidget].
+  ///
+  /// This constructor will not create a new [Lifecycle] object and won't
+  /// manage its lifecycle.
+  factory NodeScope.value({
+    required N value,
+    required Widget child,
+    Key? key,
+  }) =>
+      NodeScope._(
+        key: key,
+        value: value,
+        child: child,
+      );
 
   /// Creates a [NodeScope] widget that creates a [Lifecycle] object and
   /// propagates it down the [Element] tree using an [InheritedWidget] and
@@ -74,34 +107,52 @@ class NodeScope<N extends Lifecycle> extends StatefulWidget {
         ),
       )
       ..add(
+        DiagnosticsProperty<N>(
+          'value',
+          value,
+          description: 'A value of the desired Node',
+        ),
+      )
+      ..add(
         DiagnosticsProperty('child', child),
       );
   }
 }
 
 class _NodeScopeState<N extends Lifecycle> extends State<NodeScope<N>> {
-  N? node;
+  late N? node = initialNode;
 
+  N? get initialNode => widget.value;
   N get currentNode => node!;
+
+  void ifShouldManageNode(VoidCallback callback) {
+    if (initialNode == null) {
+      callback();
+    }
+  }
 
   void tryDisposeNode() {
     node?.dispose();
   }
 
   void createNode() {
-    node = widget.create(context)..init();
+    node = widget.create?.call(context)?..init();
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  void recreateNode() {
     tryDisposeNode();
     createNode();
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    ifShouldManageNode(recreateNode);
+  }
+
+  @override
   void dispose() {
-    tryDisposeNode();
+    ifShouldManageNode(tryDisposeNode);
     super.dispose();
   }
 
