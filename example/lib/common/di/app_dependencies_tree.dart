@@ -1,6 +1,7 @@
 import 'package:arbor/arbor.dart';
 import 'package:example/common/di/app_dependencies.dart';
 import 'package:example/common/di/feature_dependencies_module.dart';
+import 'package:example/common/di/print_observer.dart';
 import 'package:example/common/di/shared_dependencies_module.dart';
 import 'package:example/common/di/shared_parent.dart';
 import 'package:example/common/repository/user_repository.dart';
@@ -9,7 +10,8 @@ import 'package:example/common/service/mock_user_data_service.dart';
 
 class AppDependenciesTree extends BaseTree<AppDependenciesTree>
     implements AppDependencies, SharedParent<AppDependenciesTree> {
-  AppDependenciesTree({super.observer});
+  @override
+  ArborObserver? get observer => PrintObserver();
 
   @override
   FeatureDependencies get feature =>

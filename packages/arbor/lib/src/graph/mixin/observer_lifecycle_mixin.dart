@@ -5,7 +5,6 @@ mixin ObserverLifecycleMixin<N extends Lifecycle> on HasObserver
     implements Lifecycle {
   @override
   @mustCallSuper
-  @protected
   void init() {
     observer?.onInit<N>();
   }

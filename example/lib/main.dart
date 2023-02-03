@@ -67,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    final tree = AppDependenciesTree(observer: PrintObserver())..init();
+    final tree = AppDependenciesTree()..init();
     final profile = tree.feature.user().profile;
     final controller = UserProfileController(profile);
     controller.setName('John Doe');
