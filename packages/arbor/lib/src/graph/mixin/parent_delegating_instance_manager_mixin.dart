@@ -8,6 +8,10 @@ mixin ParentDelegatingInstanceManagerMixin<P extends InstanceManager>
   @nonVirtual
   @internal
   @protected
-  T createCaching<T>(ObjectFactory<T> create, {Disposer<T>? dispose}) =>
-      parent.createCaching(create, dispose: dispose);
+  T createCaching<T>(
+    InstanceManager source,
+    ObjectFactory<T> create, {
+    Disposer<T>? dispose,
+  }) =>
+      parent.createCaching(source, create, dispose: dispose);
 }

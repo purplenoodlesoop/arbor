@@ -55,7 +55,8 @@ class PrintObserver extends ArborObserver {
 
 class AppDependencies extends BaseTree<AppDependencies>
     implements SharedParent<AppDependencies>, IDependencies {
-  AppDependencies({super.observer});
+  @override
+  ArborObserver? get observer => PrintObserver();
 
   @override
   String get veryImportantString => shared(() => 'hello');
@@ -110,9 +111,7 @@ class StringConsumer {
 }
 
 void main() {
-  final dependencies = AppDependencies(
-    observer: PrintObserver(),
-  );
+  final dependencies = AppDependencies();
   final child = dependencies.exampleModule.exampleChild();
   StringConsumer(child).printStrings();
 }

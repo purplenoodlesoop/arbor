@@ -419,4 +419,4 @@ class ExampleChildNode<P extends SharedParent<P>>
 }
 ```
 
-For a complete example, see the [example project](LINK)
+For a complete example, see the [example project](https://github.com/purplenoodlesoop/arbor/tree/master/example)

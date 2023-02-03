@@ -1,5 +1,4 @@
 import 'package:example/common/di/app_dependencies_tree.dart';
-import 'package:example/common/di/print_observer.dart';
 import 'package:example/feature/user/user_profile/controller/user_profile_controller.dart';
 import 'package:flutter/material.dart';
 
@@ -67,7 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
-    final tree = AppDependenciesTree(observer: PrintObserver())..init();
+    final tree = AppDependenciesTree()..init();
     final profile = tree.feature.user().profile;
     final controller = UserProfileController(profile);
     controller.setName('John Doe');
@@ -112,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),

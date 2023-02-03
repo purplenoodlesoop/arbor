@@ -34,6 +34,7 @@ mixin AbstractNodeImplementationMixin<N extends Node<N>>
     DescendantNodeFactory<T, N> create,
   ) =>
       createCaching<T>(
+        this,
         () {
           final object = create(this as N);
           observer?.onCreatedModule<N>(object);
@@ -48,6 +49,7 @@ mixin AbstractNodeImplementationMixin<N extends Node<N>>
   @protected
   @nonVirtual
   T shared<T>(ObjectFactory<T> create, {Disposer<T>? dispose}) => createCaching(
+        this,
         () {
           final instance = create();
           observer?.onCreatedShared<N>(instance);

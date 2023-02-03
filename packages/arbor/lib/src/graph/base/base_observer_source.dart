@@ -4,9 +4,8 @@ import 'package:meta/meta.dart';
 
 abstract class BaseObserverSource implements HasObserver {
   @override
-  @internal
   @protected
-  final ArborObserver? observer;
+  ArborObserver? get observer => null;
 
-  BaseObserverSource({this.observer});
+  BaseObserverSource();
 }
