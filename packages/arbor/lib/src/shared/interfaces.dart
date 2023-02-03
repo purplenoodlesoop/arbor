@@ -58,7 +58,11 @@ abstract class ObjectFactories<N extends Node<N>> {
 /// a cached instance using a factory function. Optionally, a disposer function
 /// can be provided to dispose of the instance.
 abstract class InstanceManager {
-  T createCaching<T>(ObjectFactory<T> create, {Disposer<T>? dispose});
+  T createCaching<T>(
+    InstanceManager source,
+    ObjectFactory<T> create, {
+    Disposer<T>? dispose,
+  });
 }
 
 /// Node is a generic abstract class that implements the ObjectFactories,
